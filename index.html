@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Static Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="ui menu">
+        <div class="header item">Website Name</div>
+        <a class="item" href="#feature1">Feature 1</a>
+        <a class="item" href="#feature2">Feature 2</a>
+        <a class="item" href="#feature3">Feature 3</a>
+    </div>
+    <div class="ui container">
+        <div class="ui grid">
+            <div class="four wide column">
+                <h2>Column 1 Title</h2>
+                <p>Description for column 1.</p>
+                <img src="image1.jpg" alt="Image 1">
+            </div>
+            <div class="four wide column">
+                <h2>Column 2 Title</h2>
+                <p>Description for column 2.</p>
+                <img src="image2.jpg" alt="Image 2">
+            </div>
+            <div class="four wide column">
+                <h2>Column 3 Title</h2>
+                <p>Description for column 3.</p>
+                <img src="image3.jpg" alt="Image 3">
+            </div>
+            <div class="four wide column" id="feature1">
+                <h2>Feature 1</h2>
+                <p>Description of feature 1.</p>
+            </div>
+            <div class="four wide column" id="feature2">
+                <h2>Feature 2</h2>
+                <p>Description of feature 2.</p>
+            </div>
+            <div class="four wide column" id="feature3">
+                <h2>Feature 3</h2>
+                <p>Description of feature 3.</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Example interactivity: Show an alert when an image is clicked
+            $('img').on('click', function() {
+                alert('You clicked on ' + $(this).attr('alt'));
+            });
+        });
+    </script>
+</body>
+</html>

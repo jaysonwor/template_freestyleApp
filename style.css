@@ -1,0 +1,24 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.ui.grid {
+    margin-top: 20px; /* Space above the grid for better layout */
+}
+
+.ui.grid .column {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+}
+
+h2 {
+    color: #333; /* Dark gray color for headings */
+}
+
+p {
+    color: #666; /* Medium gray color for paragraph text */
+}
