@@ -14,35 +14,37 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Build Docker image
-        env:
-          DOCKER_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-          DOCKER_REPO: ${{ vars.DOCKERHUB_REPO }}
         run: |
-          # Build the image
-          docker build -t $DOCKER_REPO:latest .
+          # Build and tag with a local name
+          docker build -t nginx-test:latest .
           
-          # Login to DockerHub
-          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+          # Save the image to a tar file to share between jobs
+          docker save nginx-test:latest > nginx-test.tar
           
-          # Push the image
-          docker push $DOCKER_REPO:latest
+      - name: Upload image artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: docker-image
+          path: nginx-test.tar
 
   validate:
-    needs: build  # This ensures validate runs after build
+    needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Pull and run Docker image
-        env:
-          DOCKER_REPO: ${{ vars.DOCKERHUB_REPO }}
+      - name: Download image artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image
+          
+      - name: Load Docker image
         run: |
-          # Pull the image we just built
-          docker pull $DOCKER_REPO:latest
+          # Load the image from tar
+          docker load < nginx-test.tar
           
-          # Run the container in detached mode, mapping port 80
-          docker run -d -p 80:80 --name web $DOCKER_REPO:latest
+          # Run the container
+          docker run -d -p 80:80 --name web nginx-test:latest
           
-          # Wait a few seconds for Nginx to start
+          # Wait for Nginx to start
           sleep 5
           
           # Test if index.html is accessible
@@ -50,5 +52,6 @@ jobs:
             echo "Successfully validated index.html is accessible"
           else
             echo "Failed to access index.html"
+            docker logs web
             exit 1
           fi
