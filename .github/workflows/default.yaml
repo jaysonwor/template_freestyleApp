@@ -75,3 +75,4 @@ jobs:
         run: |
           docker tag nginx-test:latest $DOCKER_REPO:latest
           docker push $DOCKER_REPO:latest
+          echo "docker_image_pushed:${DOCKER_REPO}:latest"
