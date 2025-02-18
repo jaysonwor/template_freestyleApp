@@ -1,82 +1,50 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      
+      - name: Build Docker image
         run: |
-          echo Add other actions to build,
-          pwd
-          ls -alh
-          echo "lalala  ${{ vars.DOCKERHUB_REPO }}"
-      - name: Run Docker Build Script
-        env:
-          DOCKER_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-          DOCKER_REPO: ${{ vars.DOCKERHUB_REPO }}
-        run: |
-          chmod +x docker-build.sh
-          ./docker-build.sh
-  test:
-    # The type of runner that the job will run on
+          docker build -t nginx-test:latest .
+          docker save nginx-test:latest > nginx-test.tar
+          
+      - name: Upload image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-image
+          path: nginx-test.tar
+
+  validate:
+    needs: build
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Download image artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          
+      - name: Load and test Docker image
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-  deploy:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          docker load < nginx-test.tar
+          docker run -d -p 80:80 --name web nginx-test:latest
+          sleep 5
+          
+          # Test if index.html is accessible
+          if curl -f http://localhost/index.html; then
+            echo "Successfully validated index.html is accessible"
+            curl -v http://localhost/index.html
+          else
+            echo "Failed to access index.html"
+            docker logs web
+            exit 1
+          fi
