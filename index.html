@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Small Business Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="ui container">
+        <div class="ui three column grid">
+            <div class="column">
+                <h1>Welcome to Our Business</h1>
+            </div>
+            <div class="column">
+                <h2>Our Services</h2>
+                <ul>
+                    <li>Service 1</li>
+                    <li>Service 2</li>
+                    <li>Service 3</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h2>Testimonials</h2>
+                <blockquote class="testimonial" aria-label="Testimonial from Customer A">"Great service!" - Customer A</blockquote>
+                <blockquote class="testimonial" aria-label="Testimonial from Customer B">"Highly recommend!" - Customer B</blockquote>
+                <blockquote class="testimonial" aria-label="Testimonial from Customer C">"Will use again!" - Customer C</blockquote>
+                <blockquote class="testimonial" aria-label="Testimonial from Customer D">"Very satisfied!" - Customer D</blockquote>
+                <blockquote class="testimonial" aria-label="Testimonial from Customer E">"Excellent experience!" - Customer E</blockquote>
+            </div>
+        </div>
+        <h2>Contact Us</h2>
+        <form id="contactForm" class="ui form">
+            <div class="field">
+                <label>Name</label>
+                <input type="text" name="name" required minlength="2">
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="field">
+                <label>Message</label>
+                <textarea name="message" required minlength="10"></textarea>
+            </div>
+            <button type="submit" class="ui button">Submit</button>
+        </form>
+        <h2>Image Gallery</h2>
+        <div id="imageGallery" class="ui grid">
+            <!-- Images will be dynamically loaded here -->
+        </div>
+        <button id="loadMore" class="ui button">Load More Images</button>
+    </div>
+
+    <script>
+        const images = [
+            'https://via.placeholder.com/150',
+            'https://via.placeholder.com/150/0000FF',
+            'https://via.placeholder.com/150/008000',
+            'https://via.placeholder.com/150/FF0000',
+            'https://via.placeholder.com/150/FFFF00',
+            'https://via.placeholder.com/150/FF00FF'
+        ];
+        let currentIndex = 0;
+
+        function loadImages() {
+            const gallery = document.getElementById('imageGallery');
+            for (let i = 0; i < 3; i++) {
+                if (currentIndex < images.length) {
+                    const imgDiv = document.createElement('div');
+                    imgDiv.className = 'four wide column';
+                    imgDiv.innerHTML = `<img src="${images[currentIndex]}" alt="Gallery Image" class="ui image">`;
+                    gallery.appendChild(imgDiv);
+                    currentIndex++;
+                }
+            }
+        }
+
+        document.getElementById('loadMore').addEventListener('click', loadImages);
+
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message')
+            };
+            console.log('Form submitted:', data);
+            alert('Thank you for your message!');
+            this.reset();
+        });
+
+        // Load initial images
+        loadImages();
+    </script>
+</body>
+</html>
