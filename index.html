@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Small Business Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="ui grid">
+        <div class="four wide column" id="services">
+            <h2>Our Services</h2>
+            <ul>
+                <li>Service 1</li>
+                <li>Service 2</li>
+                <li>Service 3</li>
+            </ul>
+        </div>
+        <div class="four wide column" id="testimonials">
+            <h2>Testimonials</h2>
+            <div id="testimonial-list">
+                <!-- Testimonials will be dynamically loaded here -->
+            </div>
+        </div>
+        <div class="four wide column" id="contact">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <div class="ui input">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="ui input">
+                    <input type="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="ui input">
+                    <input type="text" name="phone" placeholder="Your Phone (optional)">
+                </div>
+                <div class="ui input">
+                    <input type="text" name="subject" placeholder="Subject (optional)">
+                </div>
+                <div class="ui input">
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="ui button">Send</button>
+            </form>
+        </div>
+    </div>
+    <div class="ui images" id="gallery">
+        <h2>Image Gallery</h2>
+        <!-- Image gallery will be dynamically loaded here -->
+    </div>
+</body>
+</html>
