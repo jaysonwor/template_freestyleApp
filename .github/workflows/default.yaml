@@ -48,3 +48,30 @@ jobs:
             docker logs web
             exit 1
           fi
+          
+  push:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download image artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          
+      - name: Load Docker image
+        run: |
+          docker load < nginx-test.tar
+      
+      - name: Login to DockerHub
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}  # Changed from vars to secrets
+          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+        run: |
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+          
+      - name: Tag and push image
+        env:
+          DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/my-nginx  # Changed to use your username and repo name directly
+        run: |
+          docker tag nginx-test:latest $DOCKER_REPO:latest
+          docker push $DOCKER_REPO:latest
