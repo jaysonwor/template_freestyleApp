@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Welcome to Our Web App</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Our Web App</h1>
+        <p>Your gateway to information and services.</p>
+    </header>
+    <div class="container">
+        <div class="left-column">
+            <h2>Left Column</h2>
+            <p>Additional information or links can go here.</p>
+        </div>
+        <div class="center-column">
+            <h2>About Us</h2>
+            <p>We provide various services to help you.</p>
+            <form id="contactForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+            <div id="formMessage"></div>
+        </div>
+        <div class="right-column">
+            <h2>Right Column</h2>
+            <p>Links to other resources can be placed here.</p>
+        </div>
+    </div>
+    <footer>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+    </footer>
+</body>
+</html>
