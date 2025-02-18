@@ -17,20 +17,28 @@
         <div class="ui three column grid">
             <div class="column">
                 <h2>Service 1</h2>
-                <p>Description of service 1.</p>
+                <p>We offer high-quality service 1 to meet your needs.</p>
             </div>
             <div class="column">
                 <h2>Service 2</h2>
-                <p>Description of service 2.</p>
+                <p>Our service 2 is designed to provide exceptional value.</p>
             </div>
             <div class="column">
                 <h2>Service 3</h2>
-                <p>Description of service 3.</p>
+                <p>Experience the best with our service 3 offerings.</p>
             </div>
         </div>
         <div class="ui segment">
             <h2>Testimonials</h2>
-            <p>Customer testimonial text goes here.</p>
+            <div class="testimonial">
+                <p>"This business exceeded my expectations!" - Customer A</p>
+            </div>
+            <div class="testimonial">
+                <p>"I highly recommend their services!" - Customer B</p>
+            </div>
+            <div class="testimonial">
+                <p>"Fantastic experience from start to finish!" - Customer C</p>
+            </div>
         </div>
         <form class="ui form" id="contactForm">
             <h2>Contact Us</h2>
@@ -59,5 +67,18 @@
             <img src="image3.jpg" alt="Image 3">
         </div>
     </div>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            console.log('Form submitted:', data);
+            alert('Thank you for contacting us, ' + data.name + '! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
 </body>
 </html>
