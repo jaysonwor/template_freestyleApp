@@ -14,41 +14,37 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Build Docker image
-        env:
-          DOCKER_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-          DOCKER_REPO: ${{ vars.DOCKERHUB_REPO }}
         run: |
-          # Build the image
-          docker build -t $DOCKER_REPO:latest .
+          docker build -t nginx-test:latest .
+          docker save nginx-test:latest > nginx-test.tar
           
-          # Login to DockerHub
-          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-          
-          # Push the image
-          docker push $DOCKER_REPO:latest
+      - name: Upload image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-image
+          path: nginx-test.tar
 
   validate:
-    needs: build  # This ensures validate runs after build
+    needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Pull and run Docker image
-        env:
-          DOCKER_REPO: ${{ vars.DOCKERHUB_REPO }}
+      - name: Download image artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          
+      - name: Load and test Docker image
         run: |
-          # Pull the image we just built
-          docker pull $DOCKER_REPO:latest
-          
-          # Run the container in detached mode, mapping port 80
-          docker run -d -p 80:80 --name web $DOCKER_REPO:latest
-          
-          # Wait a few seconds for Nginx to start
+          docker load < nginx-test.tar
+          docker run -d -p 80:80 --name web nginx-test:latest
           sleep 5
           
           # Test if index.html is accessible
           if curl -f http://localhost/index.html; then
             echo "Successfully validated index.html is accessible"
+            curl -v http://localhost/index.html
           else
             echo "Failed to access index.html"
+            docker logs web
             exit 1
           fi
