@@ -13,7 +13,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     }
 
     // Validate email format
-    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!email.match(emailPattern)) {
         formMessage.textContent = 'Please enter a valid email address.';
         return;
@@ -35,8 +35,10 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     })
     .then(data => {
         formMessage.textContent = 'Your message has been sent successfully!';
+        document.getElementById('contactForm').reset(); // Clear form fields
     })
     .catch(error => {
+        console.error('Error:', error);
         formMessage.textContent = 'There was an error sending your message.';
     });
 });
