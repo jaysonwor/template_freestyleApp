@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="ui grid">
+        <div class="four wide column" id="controls">
+            <h3>Controls</h3>
+            <p>Use arrow keys to control the snake.</p>
+            <h3>Players</h3>
+            <ul id="playerList"></ul>
+        </div>
+        <div class="eight wide column" id="gameArea">
+            <div id="scoreDisplay">Score: 0</div>
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+        </div>
+        <div class="four wide column" id="chatArea">
+            <h3>Chat</h3>
+            <div id="chatMessages"></div>
+            <input type="text" id="chatInput" placeholder="Type a message...">
+            <button id="sendChat">Send</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
