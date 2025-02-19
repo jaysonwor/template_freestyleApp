@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronic Medical Record System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="ui container">
+        <h1 class="ui header">Electronic Medical Record System</h1>
+        <form id="data-entry-form" class="ui form">
+            <div class="field">
+                <label>Name</label>
+                <input type="text" id="name" placeholder="Enter patient's name" required>
+            </div>
+            <div class="field">
+                <label>Age</label>
+                <input type="number" id="age" placeholder="Enter patient's age" required min="0">
+            </div>
+            <div class="field">
+                <label>Gender</label>
+                <select id="gender" class="ui dropdown" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Medical History</label>
+                <textarea id="medical-history" placeholder="Enter medical history"></textarea>
+            </div>
+            <div class="field">
+                <label>Medications</label>
+                <textarea id="medications" placeholder="Enter medications"></textarea>
+            </div>
+            <div class="field">
+                <label>Allergies</label>
+                <textarea id="allergies" placeholder="Enter allergies"></textarea>
+            </div>
+            <div class="field">
+                <label>Visit Notes</label>
+                <textarea id="visit-notes" placeholder="Enter visit notes"></textarea>
+            </div>
+            <button type="submit" class="ui button primary">Submit</button>
+        </form>
+        <div id="table-view" class="ui segment">
+            <table class="ui celled table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Medical History</th>
+                        <th>Medications</th>
+                        <th>Allergies</th>
+                        <th>Visit Notes</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="patient-table-body">
+                    <!-- Patient data will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

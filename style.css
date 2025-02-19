@@ -1,0 +1,15 @@
+/* Styles for the form layout and spacing */
+.ui.form {
+    margin-bottom: 20px;
+}
+
+/* Styles for the table to improve readability */
+.ui.table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Styles for buttons and inputs to match the Semantic UI theme */
+.ui.button {
+    margin-top: 10px;
+}
