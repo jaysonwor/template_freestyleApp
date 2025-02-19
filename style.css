@@ -1,0 +1,26 @@
+body {
+    background-color: #f9f9f9;
+}
+
+.ui.container {
+    margin-top: 20px;
+}
+
+.ui.form .field {
+    margin-bottom: 15px;
+}
+
+.ui.button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.ui.table {
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .ui.container {
+        padding: 10px;
+    }
+}
