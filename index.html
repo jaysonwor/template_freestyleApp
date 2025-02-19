@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronic Medical Record System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+</head>
+<body>
+    <div class="ui container">
+        <div class="ui grid">
+            <div class="four wide column">
+                <h2>Demographics</h2>
+                <form id="demographicsForm">
+                    <input type="text" id="patientName" placeholder="Patient Name" required>
+                    <input type="text" id="patientDOB" placeholder="Date of Birth" required>
+                    <input type="text" id="patientGender" placeholder="Gender" required>
+                    <button type="submit">Save Demographics</button>
+                </form>
+            </div>
+            <div class="four wide column">
+                <h2>Medical History</h2>
+                <form id="medicalHistoryForm">
+                    <textarea id="medicalHistory" placeholder="Enter medical history..." required></textarea>
+                    <button type="submit">Save Medical History</button>
+                </form>
+            </div>
+            <div class="four wide column">
+                <h2>Medications</h2>
+                <form id="medicationsForm">
+                    <textarea id="medications" placeholder="Enter medications..." required></textarea>
+                    <button type="submit">Save Medications</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2023 EMR System Demonstration</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
