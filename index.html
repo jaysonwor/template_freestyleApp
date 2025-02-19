@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Asset Registration</title>
+</head>
+<body>
+    <div class="ui container">
+        <h2>Asset Registration</h2>
+        <div class="ui three column grid">
+            <form id="assetForm" class="ui form">
+                <div class="field">
+                    <label>Asset Number</label>
+                    <input type="text" id="assetNumber" placeholder="Enter asset number" required>
+                </div>
+                <div class="field">
+                    <label>Name</label>
+                    <input type="text" id="assetName" placeholder="Enter asset name" required>
+                </div>
+                <div class="field">
+                    <label>Specifications</label>
+                    <input type="text" id="assetSpecifications" placeholder="Enter specifications" required>
+                </div>
+                <div class="field">
+                    <label>Purchase Date</label>
+                    <input type="date" id="purchaseDate" required>
+                </div>
+                <div class="field">
+                    <label>Purchase Price</label>
+                    <input type="number" id="purchasePrice" placeholder="Enter purchase price" required>
+                </div>
+                <div class="field">
+                    <label>Asset Category/Type</label>
+                    <input type="text" id="assetCategory" placeholder="Enter asset category/type" required>
+                </div>
+                <button class="ui button" type="submit">Register Asset</button>
+            </form>
+            <div id="successMessage" class="ui success message" style="display:none;"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+.ui.container {
+    margin-top: 20px;
+}
+
+.ui.three.column.grid {
+    display: flex;
+    justify-content: space-between;
+}
+
+#successMessage {
+    margin-top: 20px;
+    font-size: 1.2em;
+    text-align: center;
+}
