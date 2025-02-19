@@ -41,3 +41,25 @@ body {
 #sendChat {
     width: 28%;
 }
+
+/* Additional styles for interactivity */
+#sendChat:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
+
+#sendChat:active {
+    background-color: #d0d0d0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .ui.grid {
+        flex-direction: column;
+    }
+
+    #chatInput, #sendChat {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
